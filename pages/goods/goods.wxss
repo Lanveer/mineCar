@@ -1,0 +1,117 @@
+/* pages/goods/goods.wxss */
+
+page {
+  background: #dedede;
+}
+
+.box {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: space-between;
+  height: 51pt;
+  border-top: 1px solid #eaeaea;
+}
+
+.search>view {
+  width: calc(100% - 30pt);
+}
+
+.pl {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #5c5c5c;
+  font-family: 'pingFang-SC-Bold';
+}
+
+.search>view input {
+  padding-left: 10pt;
+  height: 30pt;
+}
+
+.search>text {
+  border: none;
+  outline: none;
+  width: 30pt;
+  color: #008bff;
+  font-weight: bold;
+  margin-right: 10pt;
+}
+
+.choosed {
+   white-space: nowrap; 
+  /* display: flex; */
+  flex-direction: row;
+  align-items: center;
+  height: 50pt;
+  vertical-align: middle;
+  justify-content: space-around;
+  border-top: 1px solid #eaeaea;
+}
+
+.head{
+  width: 55pt;height: 50pt;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  float: left;
+}
+.head>text{
+  font-size: 12pt;
+  margin-top: 10pt;
+}
+.head>label{
+  font-size: 9pt;
+}
+.body{
+  width: calc(100% - 55pt);
+  height: 50pt;
+  overflow: auto;
+  float: right;
+}
+.tags{
+  width: auto;
+  height: 25pt;
+  background: #50bf22;
+  color: #fff;
+  font-size: 12pt;
+  font-weight: bold;
+  padding: 1pt 10pt 1pt 10pt;
+  margin-top: 12.5pt;
+  line-height: 25pt;
+  border-radius: 5pt;
+  display: inline-block;
+  margin-right: 10pt;
+}
+
+.result {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.result>view:first-child {
+  border-top: 1px solid #eaeaea;
+}
+
+.result>view {
+  height: 40pt;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #000;
+  line-height: 40pt;
+  padding-left: 10pt;
+    font-family: 'pingFang-SC-Bold';
+}
+::-webkit-scrollbar{
+  width: 0;height: 0;background: transparent;
+}

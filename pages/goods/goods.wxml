@@ -1,0 +1,27 @@
+<view class='box'>
+
+  <view class='search'>
+    <view>
+      <input placeholder='在此输入货物(中文、拼音、首字母)' placeholder-class='pl' focus='true' bindinput='search'></input>
+    </view>
+    <text bindtap="onConfirm">确定</text>
+  </view>
+
+  <scroll-view class='choosed' scroll-x="true" wx:if="{{chooseBox}}">
+    <view class='head'>
+      <text>已选择</text>
+      <label>点击删除</label>
+    </view>
+
+    <view class='body'>
+      <view class='tags' bindtap='delete' id="{{item.id}}" wx:key="{{item.id}}" wx:for="{{choosed}}">{{item.shortName}}</view>
+    </view>
+
+  </scroll-view>
+
+  <view class='result' wx:for="{{searchResult}}">
+    <view bindtap='add' id="{{item.id}}-{{item.name}}" wx:key="{{item.id}}">{{item.name}}</view>
+  </view>
+
+
+</view>

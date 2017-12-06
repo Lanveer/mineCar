@@ -1,0 +1,71 @@
+<!--pages/mycar/mycar.wxml-->
+<form class=' mycar'>
+  <view class='section first-section'>
+    <label>
+      <input class='carnumber' placeholder='请输入车牌号' placeholder-class='pl' maxlength="8" bindinput="onPlateNumberInput" style="color:{{truck.id ? 'rgba(0, 0, 0, 0.3)' : (truck.plateNumber.length == 7 ? '#50BF22':'#000000')}};" value="{{truck.plateNumber!='' ?truck.plateNumber:''}}" disabled='{{truck.id}}' />
+    </label>
+  </view>
+
+
+  <view class='section'>
+    <label>车轴数</label>
+    <picker mode="selector" range="{{carNum}}" value="{{index}}" bindchange="carNum" class='choose'>
+        <!-- <text>{{truck.axleCount ==''?carNum[carNumIdx] :truck.axleCount}}</text>   -->
+           <text>{{truck.axleCount ==null?carNum[carNumIdx] :truck.axleCount}}</text>  
+    </picker>
+  </view>
+
+
+  <view class='section'>
+    <label>货箱型</label>
+    <picker mode='selector' range="{{carType}}" value='{{index}}' bindchange='carType' class='choose'>
+      <text>{{truck.crateType ==null ? carType[carTypeIdx] :carType[truck.crateType]}}</text>
+    </picker>
+  </view>
+
+
+  <view class='section another'>
+    <label>整备质量</label>
+    <input class='zbWeight' type='number' bindinput='allWeight' placeholder='输入整备质量'></input>
+    <view>Kg</view>
+  </view>
+
+  <view class='section another'>
+    <label>总重量</label>
+    <input class='totalWeight' type='number' bindinput='goodsWeight'placeholder='输入总质量' ></input>
+    <view>Kg</view>
+  </view>
+
+  <view class='section another'>
+    <label>核定载质量</label>
+    <input class='ruleWeight' type='number' bindinput='limitWeight' placeholder='输入核定载质量'></input>
+    <view>Kg</view>
+  </view>
+
+
+  <view class='section'>
+    <input placeholder='输入车主姓名' placeholder-class='pl' bindinput='carOwner' disabled="{{truck.id}}" value='{{truck.ownerName}}' style="color:{{truck.id ? 'rgba(0, 0, 0, 0.3)' : (obtainVerCodeBtnVisibale?'#50BF22':'#000000')}}"></input>
+  </view>
+
+  <view class='section'>
+    <input placeholder='输入车主电话' placeholder-class='pl' type='number' bindinput='carTel' maxlength='11' disabled="{{truck.id}}" value='{{truck.ownerPhone}}'></input>
+  </view>
+
+
+  <view class='section other'>
+    <label>验证码</label>
+    <input id="verCode" type="number" maxlength="6"  style="color:{{verCode.length == 6?'#50BF22':'#008BFF'}}" value="{{verCode}}"  bindinput="onVerCodeInput" ></input>
+     <text  bindtap="getCode" hidden="{{!obtainVerCodeBtnVisibale}}">获取验证码</text> 
+     <text class="restSeconds" hidden="{{verCodeCountdown == 0}}">{{verCodeCountdown + '秒'}}</text>
+
+  </view>
+
+
+
+  <view class='footer'>
+    <button class='cancel' bindtap='onCancel'> 取消</button>
+    <button class='yes' bindtap='onConfirm'>保存</button>
+  </view>
+
+
+</form>

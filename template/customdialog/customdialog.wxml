@@ -1,0 +1,29 @@
+<template name="customdialog">
+  <view id="{{id}}" class="custom-dialog-group" hidden="{{!visible}}">
+    <view class="container custom-dialog"  style="top: calc(50% - {{(18 + 21*titles.length + (icon ? (icon.height != null ? icon.height + 6 : 106) : 0) + (tipsLines ? tipsLines * 21 + 6 : 0) + (!horizontalButtons ? 45*buttons.length : 45))/2.0}}px);">
+      <view style="margin-top:18px;">
+        <label id="title{{index}}" wx:for="{{titles}}" wx:key="" class="title">{{item}}</label>
+      </view>
+      <image wx:if="{{icon}}" src="{{icon.src}}" style="width: {{icon.width != null ? icon.width : 100}}px; height: {{icon.height != null ? icon.height : 100}}px; margin-top: 6px; display: {{icon ? 'block' : 'none'}};"></image>
+      <scroll-view wx:if="{{tipsLines > 0}}" scroll-y="true" style="width: calc(100% - 40px); height: {{tipsLines * 21}}px; margin-top: 6px;">
+        <label id="{{item.id}}" wx:for="{{tips}}" wx:key="" class="tips" style="{{item.style}}">{{item.value ? item.value : item}}</label>
+      </scroll-view>
+
+      <!--纵向按钮-->
+      <view style="width: 100%;" wx:if="{{!horizontalButtons}}">
+        <view wx:for="{{buttons}}" wx:key="" style="width: 100%;">
+          <view class="cd-separate-line" wx:if="{{!item.noSeparate}}" />
+          <label id="{{item.id}}" data-index="{{index}}" class="button" style="{{item.style}}" bindtap="{{buttonTapHandler}}">{{item.value ? item.value : item}}</label>
+        </view>
+      </view>
+
+      <!--横向按钮-->
+      <view style="width: 100%; height: 45px; position: relative;" wx:if="{{horizontalButtons}}">
+          <view class="cd-separate-line"/>
+          <label id="{{buttons[0].id}}" data-index="0" class="hor-button" style="min-width: {{buttons.length == 1 ? '100%' : ''}}; {{buttons[0].style}}" bindtap="{{buttonTapHandler}}">{{buttons[0].value ? buttons[0].value : buttons[0]}}</label>
+          <view class="cd-separate-line-v" style="height: 44px; display:inline;" hidden="{{buttons.length == 1}}"/>
+          <label id="{{buttons[1].id}}" data-index="1" class="hor-button" style="{{buttons[1].style}}"  hidden="{{buttons.length == 1}}" bindtap="{{buttonTapHandler}}">{{buttons[1].value ? buttons[1].value : buttons[1]}}</label>
+      </view>
+    </view>
+  </view>
+</template>

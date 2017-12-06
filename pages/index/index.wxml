@@ -1,0 +1,145 @@
+<!--pages/index/index.wxml-->
+
+<import src="../../template/customdialog/customdialog.wxml" />
+<template is="customdialog" data="{{...dialog_lowSdkVersion}}" />
+<template is="customdialog" data="{{...dialog_serviceAgreement}}" />
+<template is="customdialog" data="{{...dialog_loadUserDataFail}}" />
+<template is="customdialog" data="{{...dialog_takePhoto}}" />
+<template is="customdialog" data="{{...dialog_cancelReportWaybill}}" />
+<template is="customdialog" data="{{...dialog_reportScuuess}}" />
+<template is="customdialog" data="{{...dialog_cancelWaybill}}" />
+<form bindsubmit='confirm' report-submit='true'>
+  <view class='section first-section' bindtap='addCar'>
+    <label wx:if="{{truck == ''}}">请先添加车辆</label>
+    <label style='color:#000;'>{{truck.plateNumber}}</label>
+     <text>添加车辆</text> 
+  </view>
+
+  <view class='tip' wx:if="{{!infoFlag}}">请逐一完成以下信息</view>
+  <view class='tip' wx:if="{{infoFlag}}">
+    <view>系统帮您填补了以下某些项目，有变动请修改</view>
+  </view>
+
+
+  <view class='section choose-section' bindtap='goods'>
+    <label wx:if="{{choosed ==''}}">请选择货物</label>
+    <!--货物堆积-->
+    <view class='goods-choosed' wx:if="{{choosed.length>0||choosed==''}}">
+      <view>{{goods}}</view>
+    </view>
+    <!--货物堆积  -->
+    <image src='../../images/arrowright.png'></image>
+  </view>
+
+
+  <!--入口收费站开始  -->
+  <view class='section choose-section' bindtap='gate'>
+    <label wx:if="{{enterData==''}}">入口收费站</label>
+    <text style='color:#50bf22;margin-left:12pt;' wx:if="{{enterData!=''}}">{{enterData.shortName}}</text>
+    <image src='../../images/arrowright.png'></image>
+  </view>
+
+  <!--入口收费站结束  -->
+
+
+  <!--出口收费站开始  -->
+  <view class='section choose-section' bindtap='gate2'>
+    <label wx:if="{{exitData==''}}">出口收费站</label>
+    <text style='color:#50bf22;margin-left:12pt;' wx:if="{{exitData!=''}}">{{exitData.shortName}}</text>
+    <image src='../../images/arrowright.png'></image>
+  </view>
+  <!--出口收费站结束  -->
+
+
+
+  <view class='pic-info'>
+    <!--行驶证照片开始  -->
+    <view class='upload' id='0' data-id='0' bindtap='chooseWxImage'>
+      <view class='up-tips' wx:if='{{!cardPic.flag}}'>
+        <text>{{cardPic.text}}</text>
+        <label>{{cardPic.label}}</label>
+      </view>
+
+      <view class='imgbox' wx:if='{{cardPic.flag}}'>
+        <!-- <image src='{{cardPic.img}}'></image> -->
+          <image src='{{cardPic.img}}'></image>
+        <view>{{cardPic.text}}</view>
+      </view>
+    </view>
+    <!--行驶证结束  -->
+
+    <!--车头照片开始  -->
+    <view class='upload' id='1' bindtap='chooseWxImage'>
+      <view class='up-tips' wx:if='{{!carHeaderPic.flag}}'>
+        <text>{{carHeaderPic.text}}</text>
+        <label>{{carHeaderPic.label}}</label>
+      </view>
+
+
+      <view class='imgbox' wx:if='{{carHeaderPic.flag}}'>
+        <image src='{{carHeaderPic.img}}'></image>
+        <view>{{carHeaderPic.text}}</view>
+      </view>
+    </view>
+    <!--车头照片结束  -->
+
+    <!--装货前开始  -->
+    <view class='upload' id='2' bindtap='chooseWxImage'>
+      <view class='up-tips' wx:if='{{!carBeforePic.flag}}'>
+        <text>{{carBeforePic.text}}</text>
+        <label>{{carBeforePic.label}}</label>
+      </view>
+      <view class='imgbox' wx:if='{{carBeforePic.flag}}'>
+        <image src='{{carBeforePic.img}}'></image>
+        <view>{{carBeforePic.text}}</view>
+      </view>
+    </view>
+    <!--装货前结束  -->
+
+
+
+    <!--装货照开始  -->
+    <view class='upload' id='{{item.id}}' bindtap='chooseWxImage' data-index='{{index}}' wx:for='{{zhuanghuo}}' wx:key='{{item.id}}'>
+      <view class='up-tips' wx:if='{{!item.flag}}' data-index='{{index}}'>
+        <text>{{item.text}}</text>
+        <label>{{item.label}}</label>
+      </view>
+
+      <view class='imgbox' wx:if='{{item.flag}}'>
+        <image src='{{item.img}}'></image>
+        <view>{{item.text}}</view>
+      </view>
+
+    </view>
+    <!--装货照结束  -->
+
+
+    <view class='upload' id='4' bindtap='chooseWxImage' data-flag='add'>
+      <image class='add' src='../../images/append.png'></image>
+    </view>
+
+    <!--装完货开始  -->
+    <view class='upload' id='3' bindtap='chooseWxImage'>
+      <view class='up-tips' wx:if='{{!carAfterPic.flag}}'>
+        <text>{{carAfterPic.text}}</text>
+        <label>{{carAfterPic.label}}</label>
+      </view>
+      <view class='imgbox' wx:if='{{carAfterPic.flag}}'>
+        <image src='{{carAfterPic.img}}'></image>
+        <view>{{carAfterPic.text}}</view>
+      </view>
+    </view>
+    <!--装完货结束  -->
+  </view>
+
+  <!--上传图片结束  -->
+
+
+  <!--底部菜单开始  -->
+  <view class='footer'>
+    <button class='cancel' bindtap='cancel'> 放弃</button>
+    <button class='yes' bindtap='confirm'>装货完成，报送</button>
+  </view>
+  <view class='clear' bindtap="ClearStorage">清除缓存</view>
+  <!--底部菜单结束  -->
+</form>

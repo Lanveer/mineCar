@@ -1,0 +1,15 @@
+
+<view class='box'>
+  <view class='section'>
+    <input placeholder='请输入入口收费站' placeholder-class='pl' data-flag='enter' bindinput="search" value='{{selectedEntry.name}}' value='{{name}}'></input>
+
+  </view>
+
+  <view class='section'>
+    <input placeholder='请输入出口收费站' placeholder-class='pl' data-flag='exit'  bindinput="search" value='{{selectedExit.name}}' value='{{name2}}'></input>
+  </view>
+
+  <view class='section section2' wx:for="{{searchResult}}" wx:key="id">
+    <text id="{{item.id}}-{{item.name}}" wx:key="{{item.id}}" bindtap="itemClick">{{item.name}}</text>
+  </view>
+</view>

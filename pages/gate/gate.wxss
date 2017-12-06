@@ -1,0 +1,38 @@
+/* pages/gate/gate.wxss */
+
+.box {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+}
+
+.pl {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #5c5c5c;
+}
+
+.section {
+  width: 100%;
+  height: 50pt;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: space-between;
+  padding-left: 12pt;
+}
+
+.section>input{
+  width: 100%;
+  display: block
+}
+
+.section2 {
+  border-top: none;
+  color: #000;
+  font-weight: bold;
+}
