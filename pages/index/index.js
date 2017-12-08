@@ -376,17 +376,17 @@ Page({
 
     //获取上一次信息以及现在的状态
     this.identifyAndLoadUserData();
-    // 获取到协议
-    // api.getLastServiceAgreement()
-    //   .then(function (res) {
-    //     if (res.status == 0) {
-    //       that.setData({
-    //         'dialog_serviceAgreement.version': res.version,
-    //         'dialog_serviceAgreement.tips': res.contents,
-    //         'dialog_serviceAgreement.visible': true,
-    //       });
-    //     }
-    //   });
+//     获取到协议
+    api.getLastServiceAgreement()
+      .then(function (res) {
+        if (res.status == 0) {
+          that.setData({
+            'dialog_serviceAgreement.version': res.version,
+            'dialog_serviceAgreement.tips': res.contents,
+            'dialog_serviceAgreement.visible': true,
+          });
+        }
+      });
 
     that.setData({
       choosed: 'hello'
