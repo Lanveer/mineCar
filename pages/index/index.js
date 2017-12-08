@@ -188,6 +188,7 @@ Page({
   isLowSdkVersion: wx.getSystemInfoSync().SDKVersion < '1.1.1',
   onLoad: function (options) {
     var that = this;
+
     // 获取网络状态
     wx.getNetworkType({
       success: function (res) {
@@ -363,7 +364,6 @@ Page({
 
     }
 
-
     // 获取微信版本信息的提示框
 
     if (this.isLowSdkVersion) {
@@ -377,17 +377,20 @@ Page({
     //获取上一次信息以及现在的状态
     this.identifyAndLoadUserData();
     // 获取到协议
-    api.getLastServiceAgreement()
-      .then(function (res) {
-        console.log('jjjjjjjj:', res)
-        if (res.status == 0) {
-          that.setData({
-            'dialog_serviceAgreement.version': res.version,
-            'dialog_serviceAgreement.tips': res.contents,
-            'dialog_serviceAgreement.visible': true,
-          });
-        }
-      });
+    // api.getLastServiceAgreement()
+    //   .then(function (res) {
+    //     if (res.status == 0) {
+    //       that.setData({
+    //         'dialog_serviceAgreement.version': res.version,
+    //         'dialog_serviceAgreement.tips': res.contents,
+    //         'dialog_serviceAgreement.visible': true,
+    //       });
+    //     }
+    //   });
+
+    that.setData({
+      choosed: 'hello'
+    })
 
   },
 
@@ -1047,6 +1050,9 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['camera'],
       success: function (resp) {
+        wx.showLoading({
+          title: '上传中',
+        });
         if (idx == 0) {
           wx.getLocation({
             success: function (res) {
@@ -1523,7 +1529,6 @@ Page({
       loadedFreights.push(all);
     }
 
-
     // 拼接参数
     var loadPlaces = {};
     var photos = [];
@@ -1558,7 +1563,6 @@ Page({
       truckPhotos: cardPicSIngle
     }
     console.log(params)
-    // return
     var pStr = '&uploadType=uploadWaybill&truckId=' + truckId + '';
     var url = getApp().getMainServicePath() + 'uploadObject?' + pStr;
     wx.showLoading({

@@ -2,9 +2,9 @@
 import MyToast from '../../utils/toast.js'
 function imgUpload(filePath, waybillId, truckId, flag, callback) {
   var url = getApp().getMainServicePath() + 'uploadObjectAndSomeFile';
-  wx.showLoading({
-    title: '上传中',
-  });
+  // wx.showLoading({
+  //   title: '上传中',
+  // });
   wx.uploadFile({
     url: url,
     filePath: filePath,

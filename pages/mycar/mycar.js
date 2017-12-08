@@ -9,6 +9,8 @@ Page({
   /**
    * 页面的初始数据
    */
+
+  
   data: {
     carNum: ['选择车轴数','2', '3', '4', '5', '6'],
     carNumIdx: 0,
@@ -192,7 +194,6 @@ Page({
 // 验证信息
     var tel = that.data.truck.ownerPhone;
 
-console.log(tel)
     if (tel==undefined) {
       wx.showModal({
         title: '提示',
@@ -256,6 +257,7 @@ console.log(tel)
     var that =this
     console.log(that.data.truck)
     var check = validator.doValidate(this.data.truck);
+    console.log(check)
     if (check != null) {
       MyToast.showMsgShort(check, 2);
       return;
@@ -283,7 +285,7 @@ console.log(tel)
             if (msg.statusCode!= 200) {
               wx.showModal({
                 title: '提示',
-                content: '验证码错误',
+                content: msg.data.msg,
               })
             } else {
               MyToast.showMsgShort('注册成功！', 0)

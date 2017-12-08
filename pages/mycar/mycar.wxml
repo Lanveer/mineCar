@@ -2,7 +2,7 @@
 <form class=' mycar'>
   <view class='section first-section'>
     <label>
-      <input class='carnumber' placeholder='请输入车牌号' placeholder-class='pl' maxlength="8" bindinput="onPlateNumberInput" style="color:{{truck.id ? 'rgba(0, 0, 0, 0.3)' : (truck.plateNumber.length == 7 ? '#50BF22':'#000000')}};" value="{{truck.plateNumber!='' ?truck.plateNumber:''}}" disabled='{{truck.id}}' />
+      <input class='carnumber' type='text' placeholder='请输入车牌号' placeholder-class='pl' maxlength="8" bindinput="onPlateNumberInput" style="color:{{truck.id ? 'rgba(0, 0, 0, 0.3)' : (truck.plateNumber.length == 7 ? '#50BF22':'#000000')}};" value="{{truck.plateNumber!='' ?truck.plateNumber:''}}" disabled='{{truck.id}}' />
     </label>
   </view>
 

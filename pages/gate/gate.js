@@ -18,8 +18,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     // 从缓存获取之前输入的信息
-    var enterData = wx.getStorageSync('enterData');
-    var exitData = wx.getStorageSync('exitData');
+    var enterData = wx.getStorageSync('enterData11');
+    var exitData = wx.getStorageSync('exitData11');
     if (enterData != '') {
       that.setData({
         name: enterData.name
