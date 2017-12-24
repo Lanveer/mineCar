@@ -10,7 +10,6 @@ Page({
    * 页面的初始数据
    */
 
-  
   data: {
     carNum: ['选择车轴数','2', '3', '4', '5', '6'],
     carNumIdx: 0,
@@ -179,7 +178,6 @@ Page({
   },
 
 
-
   // 获取验证码开始
   getCode: function (e) {
 
@@ -257,7 +255,6 @@ Page({
     var that =this
     console.log(that.data.truck)
     var check = validator.doValidate(this.data.truck);
-    console.log(check)
     if (check != null) {
       MyToast.showMsgShort(check, 2);
       return;
@@ -318,8 +315,6 @@ Page({
         })
       }
     })
-
-
   }
 
 })

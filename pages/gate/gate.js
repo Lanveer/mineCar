@@ -17,29 +17,28 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // 从缓存获取之前输入的信息
-    var enterData = wx.getStorageSync('enterData11');
-    var exitData = wx.getStorageSync('exitData11');
-    if (enterData != '') {
-      that.setData({
-        name: enterData.name
-      })
+    // 入站
+    var enterData1 = wx.getStorageSync('enterData11');
+    var enterData2 = wx.getStorageSync('enterData');
+    if (enterData2 != '') {
+      var enterData = enterData2
     } else {
-      that.setData({
-        name: ''
-      })
+      var enterData = enterData1
     }
-
-    if (exitData != '') {
-      that.setData({
-        name2: exitData.name
-      })
+    that.setData({
+      name: enterData.shortName
+    })
+    // 出站
+    var exitData1 = wx.getStorageSync('exitData11');
+    var exitData2 = wx.getStorageSync('exitData');
+    if (exitData2 != '') {
+      var exitData = exitData2
     } else {
-      that.setData({
-        name2: ''
-      })
+      var exitData = exitData1
     }
-
+    that.setData({
+      name2: exitData.shortName
+    });
   },
 
   /**
@@ -128,7 +127,7 @@ Page({
       wx.request({
         url: app.getMainServicePath() + "searchTollgate/" + encodeURIComponent(text) + '/' + 1,
         data: {},
-        header: { 
+        header: {
           "Content-Type": "text/plain"
         },
         method: 'get',
@@ -165,7 +164,7 @@ Page({
       that.setData({
         selectedEntry: { 'id': id, 'name': name, 'shortName': shortName },
         searchResult: [],
-        name:shortName
+        name: shortName
       });
       var enterData = {
         'id': id, 'name': name, 'shortName': shortName

@@ -7,9 +7,9 @@ var picTime = require('date.js');
 var picUpload = require('uploadPic.js');
 Page({
   data: {
-    freshFlag: false,
-    imgDelFlag: false,
-    onShowFlag: false,
+    freshFlag:false,
+    imgDelFlag:false,
+    onShowFlag:false,
     infoFlag: '',
     tt: 2,
     carflag: '',
@@ -186,7 +186,7 @@ Page({
   // 微信低版本检测
   isLowSdkVersion: wx.getSystemInfoSync().SDKVersion < '1.1.1',
   onLoad: function (options) {
-    var that = this;
+    var that = this;   
     // 获取网络状态
     wx.getNetworkType({
       success: function (res) {
@@ -384,8 +384,6 @@ Page({
         }
       });
   },
-
-
   //onload 结束
 
   // 获取用户信息
@@ -430,24 +428,22 @@ Page({
         if (truck.photos.length != 0) {
           that.setData({
             'cardPic.flag': true,
-            'dialog_reportScuuess.visible': false,
           });
-          for (var i = 0; i < truck.photos.length; i++) {
-            if (truck.photos[i].type == 5) {
-              var realImg = host + truck.photos[i].path;
-              wx.setStorageSync('driverLicense', realImg)
+          for (var i = 0; i < truck.photos.length;i++){
+            if (truck.photos[i].type==5){
+              var realImg = host+truck.photos[i].path;
+               wx.setStorageSync('driverLicense', realImg)
             }
           }
-        } else {
+        }else{
           that.setData({
             'cardPic.flag': false,
-            'dialog_reportScuuess.visible': false,
           });
         }
         that.setData({
           truck: truck,
           'cardPic.img': realImg
-        });
+        });  
         that.loadLastWaybill();
       });
   },
@@ -474,8 +470,10 @@ Page({
             } else if (waybill.state == '2') {
               wx.setStorageSync('clearFlag', true)
               var host = getApp().getMainPicturePath();
-              // var imgPath = waybill.loadPlaces["0"].loadPhotos[0].path;
+              var imgPath = waybill.loadPlaces["0"].loadPhotos[0].path;
               // var license = host + waybill.loadPlaces["0"].loadPhotos[0].path;
+              // var l_imgs = that.data.cardPic.img;
+
               that.setData({
                 infoFlag: true,
                 // 'cardPic.flag': true,
@@ -589,14 +587,14 @@ Page({
         var driverLicense = wx.getStorageSync('driverLicense');
         that.setData({
           'cardPic.img': driverLicense
-        });
+        }); 
         // 1.货物
         var datas1 = wx.getStorageSync('choosed');
         var datas2 = wx.getStorageSync('selectedResults');
-        if (datas2 != '') {
-          var datas = datas2
-        } else {
-          var datas = datas1
+        if(datas2!=''){
+          var datas=datas2
+        }else{
+          var datas=datas1
         }
         if (datas.length > 4) {
           var temp1 = [];
@@ -625,10 +623,10 @@ Page({
         //2.入站
         var enterData1 = wx.getStorageSync('enterData11');
         var enterData2 = wx.getStorageSync('enterData');
-        if (enterData2 != '') {
-          var enterData = enterData2
-        } else {
-          var enterData = enterData1
+        if (enterData2!=''){
+          var enterData=enterData2
+        }else{
+          var enterData=enterData1
         }
 
         that.setData({
@@ -638,9 +636,9 @@ Page({
         // 3.出站
         var exitData1 = wx.getStorageSync('exitData11');
         var exitData2 = wx.getStorageSync('exitData');
-        if (exitData2 != '') {
+        if (exitData2!=''){
           var exitData = exitData2
-        } else {
+        }else{
           var exitData = exitData1
         }
         that.setData({
@@ -678,12 +676,9 @@ Page({
       })
       // 处理正常结束的订单
       var driverLicense = wx.getStorageSync('driverLicense');
-      if (driverLicense != '') {
-        that.setData({
-          'cardPic.img': driverLicense
-        });
-      }
-
+      that.setData({
+        'cardPic.img': driverLicense
+      });  
       console.log('老用户通过上次订单结束的')
       var oldData = wx.getStorageSync('choosed');
       var editData = wx.getStorageSync('selectedResults');
@@ -776,10 +771,10 @@ Page({
         goods: b
       })
     }
-
+  
     // 处理多个货物的选择结束
 
-
+    
   },
 
 
@@ -1095,7 +1090,7 @@ Page({
               var latitude = res.latitude;
               var longitude = res.longitude;
               var img = resp.tempFilePaths[0];
-              picUpload.imgUpload(img, that.data.waybillId, that.data.truck.id, 'car_a',0);
+              picUpload.imgUpload(img, that.data.waybillId, that.data.truck.id, 'car_a');
               var cardPic = {
                 time: time,
                 latitude: latitude,
@@ -1195,6 +1190,7 @@ Page({
               var z = 'car_f'
               break;
           }
+
           if (zIndx !== undefined) {
             // 这里是装货照1和2
             wx.getLocation({
@@ -1255,6 +1251,7 @@ Page({
                 var z = 'car_j'
                 break;
             }
+
             if (i > 6) {
               wx.showModal({
                 title: '提示',
@@ -1378,15 +1375,14 @@ Page({
 
     }
 
-
     // 行驶证校验
-    // var cardPic = that.data.cardPic;
-    // var carImg = wx.getStorageSync('car_a');
-    // if (carImg == '' && cardPic == '') {
-    //   MyToast.showMsgShort('请上传行驶证照片', 2);
-    //   return;
-    // } else {
-    // }
+    var cardPic = that.data.cardPic;
+    var carImg = wx.getStorageSync('car_a');
+    if (carImg == '' && cardPic.img == '') {
+      MyToast.showMsgShort('请上传行驶证照片', 2);
+      return;
+    } else {
+    }
 
 
     // 车头照片校验
@@ -1457,37 +1453,23 @@ Page({
       var ou = {}
       var ner = {};
       // var x = parseInt(i + 4);
-      var x = parseInt(i + 3);
-      // if (x == 4) {
-      //   var na = 'car_d'
-      // } else if (x == 5) {
-      //   var na = 'car_e'
-      // } else if (x == 6) {
-      //   var na = 'car_f'
-      // } else if (x == 7) {
-      //   var na = 'car_g'
-      // }
-      if (x == 3) {
-        var na = 'car_e'
-      } else if (x == 4) {
-        var na = 'car_f'
+      var x = parseInt(i + 5);
+      if (x == 4) {
+        var na = 'car_d'
       } else if (x == 5) {
-        var na = 'car_g'
+        var na = 'car_e'
       } else if (x == 6) {
-        var na = 'car_h'
+        var na = 'car_f'
       } else if (x == 7) {
-        var na = 'car_i'
-      }
-      else if (x == 8) {
-        var na = 'car_j'
+        var na = 'car_g'
       }
       ner.id = x
       ner.loadPlaceId = 'lp1';
-      ner.typeId = '6';
       ner.path = wx.getStorageSync(na).imgPath;
       ner.positionX = zhuanghuo[i].longitude;
       ner.positionY = zhuanghuo[i].latitude;
       ner.time = zhuanghuo[i].time;
+      ner.typeId = '6';
       zhuanghuoImgs.push(ner);
     }
     // 行驶证照片
@@ -1496,21 +1478,22 @@ Page({
       var licencePic = cardPic.imgPath;
       var posX = carHeaderPic.longitude;
       var posY = carHeaderPic.latitude;
-      var time = carHeaderPic.time
+      var time = carHeaderPic.time;
     } else {
+      console.log('there')
       var licencePic = licencepicture.imgPath;
       var posX = cardPic.longitude;
       var posY = cardPic.latitude;
       var time = cardPic.time
     }
     var cardPicP = {
-      id:1,
+      id: 1,
       loadPlaceId: 'lp1',
-      typeId: '8',
       path: licencePic,
       positionX: posX,
       positionY: posY,
       time: time,
+      typeId: '5'
     }
     //精简版行驶证照片
     var cardPicSIngle = [];
@@ -1520,40 +1503,42 @@ Page({
       positionX: posX,
       positionY: posY,
       time: time,
-      typeId: '5'
+      type: '5'
     }
     cardPicSIngle.push(cardPicS);
     // 车头照片
     var carHeaderP = {
-      id: 1,
+      id: 2,
       loadPlaceId: 'lp1',
-      typeId: '1',
       path: wx.getStorageSync('car_b').imgPath,
       positionX: carHeaderPic.longitude,
       positionY: carHeaderPic.latitude,
       time: carHeaderPic.time,
+      typeId: '1'
     }
     // 装货前
     var carBeforeP = {
-      id: 2,
+      id: 3,
       loadPlaceId: 'lp1',
-      typeId: '5',
       path: wx.getStorageSync('car_c').imgPath,
       positionX: carBeforePic.longitude,
       positionY: carBeforePic.latitude,
       time: carBeforePic.time,
+      typeId: '5'
+
     }
     // 装完货
     var zids = zhuanghuo.length;
-    var zid = parseInt(zids + 3);
+    var zid = parseInt(zids + 4);
     var carAfterP = {
-      id: zid,
+      // id: zid,
+      id: 4,
       loadPlaceId: 'lp1',
-      typeId: '7',
       path: wx.getStorageSync('car_d').imgPath,
       positionX: carAfterPic.longitude,
       positionY: carAfterPic.latitude,
       time: carAfterPic.time,
+      typeId: '7'
     }
 
 
@@ -1575,12 +1560,14 @@ Page({
     var photos = [];
     // photos.push(cardPicP, carHeaderP, carBeforeP, carAfterP);
     // 如果本地已经上报过，就不需要行驶证了
-    if (that.data.truck.photos.length!= 0) {
+    if (that.data.truck.photo!='') {
+      console.log('here')
       photos.push(carHeaderP, carBeforeP);
     } else {
+      console.log('there')
       photos.push(cardPicP, carHeaderP, carBeforeP);
     }
-    // photos.push(cardPicP, carHeaderP, carBeforeP);
+
     var allPictures = photos;
     allPictures = allPictures.concat(zhuanghuoImgs);
     allPictures.push(carAfterP)
@@ -1591,6 +1578,7 @@ Page({
     loadPlaces.positionX = cardPic.longitude;
     loadPlaces.positionY = cardPic.latitude;
     loadPlaces.waybillId = id;
+
     var params = {
       createTime: time,
       sourceTollgateId: sourceTollgateId,
@@ -1604,8 +1592,7 @@ Page({
     }
     console.log(params);
     // return;
- 
-    // 报送运单数据
+
     var pStr = '&uploadType=uploadWaybill&truckId=' + truckId + '';
     var url = getApp().getMainServicePath() + 'uploadObject?' + pStr;
     wx.showLoading({
@@ -1631,14 +1618,14 @@ Page({
           //报送成功
           that.setData({
             'dialog_reportScuuess.visible': true,
-            imgDelFlag: false,
-            'cardPic.img':'',
+            imgDelFlag: false
           });
           that.loadLastWaybill()
           // 清除一些信息
           wx.removeStorageSync('choosed');
           wx.removeStorageSync('selectedResults');
           wx.removeStorageSync('driverLicense');
+          
         }
       },
       fail: function (err) {
@@ -1666,10 +1653,20 @@ Page({
       confirmText: '清理',
       success: function (res) {
         if (res.confirm) {
+          // wx.showLoading({
+          //   title: '清除中',
+          // })
           wx.clearStorage();
           wx.reLaunch({
             url: 'index',
           })
+          // wx.reLaunch({
+          //   url: 'index',
+          //   complete: function () {
+          //     wx.clearStorage();
+          //     wx.hideLoading();
+          //   }
+          // })
         }
       },
     });

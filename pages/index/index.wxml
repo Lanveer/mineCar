@@ -20,9 +20,9 @@
     <view>系统帮您填补了以下某些项目，有变动请修改</view>
   </view>
 
-
   <view class='section choose-section' bindtap='goods'>
-    <label wx:if="{{choosed ==''}}">请选择货物</label>
+    <!-- <label wx:if="{{ goods=='' || choosed == ''}}">请选择货物</label> -->
+     <label wx:if="{{goods==''||goods==null}}">请选择货物</label>
     <!--货物堆积-->
     <view class='goods-choosed' wx:if="{{choosed.length>0||choosed==''}}">
       <view>{{goods}}</view>
@@ -61,7 +61,6 @@
       </view>
 
       <view class='imgbox' wx:if='{{cardPic.flag}}'>
-        <!-- <image src='{{cardPic.img}}'></image> -->
           <image src='{{cardPic.img}}'></image>
         <view>{{cardPic.text}}</view>
       </view>

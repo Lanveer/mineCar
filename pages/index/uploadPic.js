@@ -1,16 +1,24 @@
 
 import MyToast from '../../utils/toast.js'
-function imgUpload(filePath, waybillId, truckId, flag, callback) {
+function imgUpload(filePath, waybillId, truckId, flag, callback,tp) {
+  
   var url = getApp().getMainServicePath() + 'uploadObjectAndSomeFile';
-  // wx.showLoading({
-  //   title: '上传中',
-  // });
+
+  wx.showLoading({
+    title: '上传中',
+  });
+  var tp=tp;
+  if(tp!=undefined){
+    var x = 'uploadTruck'
+  }else{
+    var x = 'uploadWaybill'
+  }
   wx.uploadFile({
     url: url,
     filePath: filePath,
     name: 'file',
     formData: {
-      uploadType: 'uploadWaybill',
+      uploadType: x,
       theFilePathInClient: 'p.png',
       waybillId: waybillId,
       forderName: waybillId,

@@ -42,7 +42,8 @@ Page({
         chooseBox: true,
         choosed: data
       });
-      wx.setStorageSync('selectedResults', data)
+      wx.setStorageSync('selectedResults', data);
+      wx.setStorageSync('choosed', data)
     }
 
   },
