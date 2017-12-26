@@ -448,6 +448,7 @@ Page({
           truck: truck,
           'cardPic.img': realImg
         });
+        console.log('license is:',realImg)
         that.loadLastWaybill();
       });
   },
@@ -588,7 +589,7 @@ Page({
         //0.行驶证
         var driverLicense = wx.getStorageSync('driverLicense');
         that.setData({
-          'cardPic.img': driverLicense
+          // 'cardPic.img': driverLicense
         });
         // 1.货物
         var datas1 = wx.getStorageSync('choosed');
@@ -670,6 +671,7 @@ Page({
     var imgDelFlag = that.data.imgDelFlag;
     if (!imgDelFlag) {
       that.loadLastWaybill();
+      that.loadData();
     }
     var onShowFlag = wx.getStorageSync('onShowFlag');
     if (onShowFlag) {
@@ -683,7 +685,6 @@ Page({
           'cardPic.img': driverLicense
         });
       }
-
       console.log('老用户通过上次订单结束的')
       var oldData = wx.getStorageSync('choosed');
       var editData = wx.getStorageSync('selectedResults');
@@ -1632,7 +1633,6 @@ Page({
           that.setData({
             'dialog_reportScuuess.visible': true,
             imgDelFlag: false,
-            'cardPic.img':'',
           });
           that.loadLastWaybill()
           // 清除一些信息
